@@ -155,6 +155,18 @@ struct Cat
     void jump();
     void chill();
     void purrrr();
+
+    float returnMood()
+    {
+        return mood;
+    }
+
+    void printMemberWithFunc() 
+	{ 
+		std::cout << "\nCat´s age in memberFunc: " << this->age << std::endl;
+        std::cout << "Cat´s mood in memberFunc: " << this->returnMood() << std::endl;
+	}
+
 };
 
 void Cat::jump() 
@@ -239,10 +251,10 @@ struct LivingRoom
 
     ~Fun() 
     { 
-        std::cout << "fun dtor" << std::endl;
+        // std::cout << "fun destructor" << std::endl;
 
-        cat.jump();
-        cup.fallFromTable(); 
+        // cat.jump();
+        // cup.fallFromTable(); 
     }
 
     Cat cat;
@@ -259,12 +271,20 @@ int main()
     cat.jump();
     cup.fallFromTable();
     
-    std::cout << " " << std::endl;
-
-    Part5::main();
-    
     LivingRoom livingRoom;
     Fun fun;
 
-    std::cout << "good to go!" << std::endl;
+    // Project 5 Part 2
+    std::cout << "\n====PROJECT 5 PART 2 START====" << std::endl;
+
+    // 1
+    std::cout << "cat´s age: " << cat.age << std::endl;
+    std::cout << "cup´s weigth: " << cup.weigth << std::endl;
+
+    // printing via this->
+    cat.printMemberWithFunc(); 
+
+    std::cout << "====PROJECT 5 PART 2 END====\n" << std::endl;
+
+    std::cout << "good to go!\n" << std::endl;
 }
