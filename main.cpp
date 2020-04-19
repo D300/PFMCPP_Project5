@@ -45,28 +45,199 @@ send me a DM to check your pull request
  Wait for my code review.
  */
 
+#include <iostream>
+
 /*
  copied UDT 1:
  */
+
+namespace Part5 {
+
+struct Water
+{
+    float clarity = -50.f;
+    Water(float c) : clarity(c) { }
+
+    ~Water() { std::cout << "water destructor" << std::endl; }
+
+    float getCondition()
+    {
+        return clarity;
+    }
+};
+
+struct Aquarium
+{
+    float size;
+
+    Aquarium() :
+    size(39)
+    {
+        std::cout << "aquarium ctor\n" << std::endl;
+    }
+
+    ~Aquarium() { std::cout << "aquarium destructor" << std::endl; }
+
+    Water filterWaterUntilItsClean(Water water);
+};
+
+Water Aquarium::filterWaterUntilItsClean(Water water)
+{
+
+    while (water.getCondition() < 0)
+    {
+        water.clarity += 5;
+        std::cout << "...filters water..." << std::endl;
+    }
+    
+    return water;
+}
+
+int main()
+{
+    Aquarium aquarium;
+    Water water(-50);
+    
+    auto filteredWater = aquarium.filterWaterUntilItsClean(water);
+
+    std::cout << "\nwater is clean with a clarity of " << filteredWater.clarity << "\n" << std::endl;
+
+    return 0;
+}
+
+} // end namespace
+
 
 /*
  copied UDT 2:
  */
 
+struct Cat
+{
+    float hairLen = 0.3f;
+
+    Cat() { hairLen = 0.5f; }
+
+    ~Cat() { std::cout << "cat destructor" << std::endl; }
+
+    int teethStyle;
+    bool healthy = true;
+    int age = 4;
+    float mood = 0.5f;
+    
+    void jump();
+    void chill();
+    void purrrr();
+};
+
+void Cat::jump() 
+{
+    std::cout << "jump - Art washes away from the soul the dust of everyday life.\n" << std::endl;
+}
+void Cat::chill() 
+{
+    std::cout << "chill" << std::endl;
+}
+void Cat::purrrr() 
+{
+    std::cout << "purrrr" << std::endl;
+}
+
 /*
  copied UDT 3:
  */
 
+struct Cup 
+{
+    int color = 1;
+
+    Cup() { color = 2; }
+
+    ~Cup() { std::cout << "cup destructor" << std::endl; }
+
+    int material = 0;
+    float size = 1.5f;
+    bool dirty = false;
+    float weigth = 5.0f;
+    
+    void stand();
+    void breakCup();
+    void fallFromTable();
+};
+
+void Cup::stand() 
+{
+    std::cout << "stand" << std::endl;
+}
+void Cup::breakCup() 
+{
+    std::cout << "breakCup" << std::endl;
+}
+void Cup::fallFromTable() 
+{
+    std::cout << "fallFromTable - Art is a lie that makes us realize truth.\n" << std::endl;
+}
+
 /*
  new UDT 4:
  */
+struct LivingRoom
+{
+    LivingRoom() 
+    {
+        std::cout << "LivingRoom ctor" << std::endl;
+    }
+    ~LivingRoom() 
+    {
+        std::cout << "LivingRoom dtor" << std::endl;
+    }
+    
+    Part5::Aquarium aquarium;
+    Cat cat;
+
+    void tryToCatchAFish();
+};
+
 
 /*
  new UDT 5:
  */
 
-#include <iostream>
+ struct Fun
+ {
+    Fun() 
+    {
+        std::cout << "fun ctor" << std::endl;
+    }
+
+    ~Fun() 
+    { 
+        std::cout << "fun dtor" << std::endl;
+
+        cat.jump();
+        cup.fallFromTable(); 
+    }
+
+    Cat cat;
+    Cup cup;
+ };
+
+
 int main()
 {
+    Part5::Aquarium aquarium;
+    Cat cat;
+    Cup cup;
+    
+    cat.jump();
+    cup.fallFromTable();
+    
+    std::cout << " " << std::endl;
+
+    Part5::main();
+    
+    LivingRoom livingRoom;
+    Fun fun;
+
     std::cout << "good to go!" << std::endl;
 }
