@@ -84,7 +84,7 @@ struct Aquarium
 Water Aquarium::filterWaterUntilItsClean(Water water)
 {
 
-    while (water.getCondition() < 0) // a)
+    while (water.getCondition() < 0)
     {
         water.clarity += 5;
         std::cout << "...filters water..." << std::endl;
@@ -236,8 +236,8 @@ int main()
 
     Part5::main();
     
-    std::cout << "good to go!" << std::endl;
-
     LivingRoom livingRoom;
     Fun fun;
+
+    std::cout << "good to go!" << std::endl;
 }
