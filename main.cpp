@@ -163,7 +163,7 @@ struct Cat
 
     void printMemberWithFunc() 
 	{ 
-		std::cout << "\nCat´s age in memberFunc: " << this->age << std::endl;
+        std::cout << "\nCat´s age in memberFunc: " << this->age << std::endl;
         std::cout << "Cat´s mood in memberFunc: " << this->returnMood() << std::endl;
 	}
 
