@@ -346,18 +346,11 @@ int main()
 
 
     // Part 3
-    Water clearWater = Water(10.f);
-    Water* ptrToClearWater = &clearWater;
+    WaterWrapper wW (new Water(15.f));
+    std::cout << "water´s condition: " << wW.ptrToWater->getCondition() << std::endl;
 
-    auto* wW = new WaterWrapper(ptrToClearWater);
-    std::cout << "water´s condition: " << wW->ptrToWater->getCondition() << std::endl;
-
-    Fun* ptrToFun = &fun;
-    auto* fW = new FunWrapper(ptrToFun);
-    fW->ptrToFun->printFun();
-
-    
-
+    FunWrapper fW ( new Fun());
+    fW.ptrToFun->printFun();
 
     /*
      here's the wrapper class usage, from the 'new' video
