@@ -239,8 +239,8 @@ struct LivingRoom
 {
     struct LeftCornerOfRoom
     {
-        Aquarium& a1, &a2;  //Nested depends on two B instances
-        LeftCornerOfRoom(Aquarium& aOne_, Aquarium& aTwo_) : a1(aOne_), a2(aTwo_) { }
+        Aquarium* a1, *a2;  //Nested depends on two B instances
+        LeftCornerOfRoom(Aquarium* aOne_, Aquarium* aTwo_) : a1(aOne_), a2(aTwo_) { }
     };
     
     // i put those vars here because I init them in the ctor
@@ -252,7 +252,7 @@ struct LivingRoom
 
 
     // i cant refer to a practical situation thats why I dont no if dereferencing makes sense then but practically I need an object in this ctor, not a ptr
-    LeftCornerOfRoom leftCornerOfRoom { *aquarium, *aquarium };
+    LeftCornerOfRoom leftCornerOfRoom { aquarium, aquarium };
 
     void tryToCatchAFish();
 
