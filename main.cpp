@@ -312,7 +312,7 @@ struct LivingRoomWrapper
     
     FunWrapper(Fun* ptr) : ptrToFun(ptr) { }
 
-    FunWrapper()
+    ~FunWrapper()
     {
         delete ptrToFun;
     }
@@ -321,10 +321,9 @@ struct LivingRoomWrapper
 
 int main()
 {
-    // Aquarium aPlants, aSharks;
-    // Cat cat;
+    Aquarium aPlants, aSharks;
+    Cat cat;
 
-    // Project 5 Part 2
     /*
     std::cout << "\n====PROJECT 5 PART 2 START====" << std::endl;
 
@@ -342,36 +341,20 @@ int main()
 
 
     // Part 3
-    // WaterWrapper wW (new Water(15.f));
-    // std::cout << "water´s condition: " << wW.ptrToWater->getCondition() << std::endl;
+    WaterWrapper wW (new Water(15.f));
+    std::cout << "water´s condition: " << wW.ptrToWater->getCondition() << std::endl;
 
     FunWrapper fW ( new Fun());
     fW.ptrToFun->printFun();
 
-    /*
-     here's the wrapper class usage, from the 'new' video
-     */
-    // LivingRoomWrapper livingRoomWrapper( new LivingRoom(cat) );
+    LivingRoomWrapper livingRoomWrapper( new LivingRoom(cat) );
     
-    // livingRoomWrapper.livingRoom->cat.purrrr();
+    livingRoomWrapper.livingRoom->cat.purrrr();
 
-    // if (&livingRoomWrapper.livingRoom->aquaOneP == &livingRoomWrapper.livingRoom->leftCornerOfRoom.aOne)
-    // {
-        // std::cout << "they're the same object" << std::endl;
-    // }
-
-    
-    /*
-     here's the wrapper class usage, from the 'new' video
-     */
-    
-    /*
-    UDTWrapper udt1Wrapper( new MyUDT_1(a, &c) );
-    
-    if( &udt1Wrapper.udt1->b1 == &udt1Wrapper.udt1->nested.b1 )
+    if (&livingRoomWrapper.livingRoom->aquaOneP == &livingRoomWrapper.livingRoom->leftCornerOfRoom.aOne)
+    {
         std::cout << "they're the same object" << std::endl;
-    */
-
+    }
 
     std::cout << "good to go!\n" << std::endl;
 }
