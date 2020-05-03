@@ -321,8 +321,8 @@ struct LivingRoomWrapper
 
 int main()
 {
-    Aquarium aPlants, aSharks;
-    Cat cat;
+    // Aquarium aPlants, aSharks;
+    // Cat cat;
 
     // Project 5 Part 2
     /*
@@ -342,8 +342,8 @@ int main()
 
 
     // Part 3
-    WaterWrapper wW (new Water(15.f));
-    std::cout << "water´s condition: " << wW.ptrToWater->getCondition() << std::endl;
+    // WaterWrapper wW (new Water(15.f));
+    // std::cout << "water´s condition: " << wW.ptrToWater->getCondition() << std::endl;
 
     FunWrapper fW ( new Fun());
     fW.ptrToFun->printFun();
@@ -351,14 +351,14 @@ int main()
     /*
      here's the wrapper class usage, from the 'new' video
      */
-    LivingRoomWrapper livingRoomWrapper( new LivingRoom(cat) );
+    // LivingRoomWrapper livingRoomWrapper( new LivingRoom(cat) );
     
-    livingRoomWrapper.livingRoom->cat.purrrr();
+    // livingRoomWrapper.livingRoom->cat.purrrr();
 
-    if (&livingRoomWrapper.livingRoom->aquaOneP == &livingRoomWrapper.livingRoom->leftCornerOfRoom.aOne)
-    {
-        std::cout << "they're the same object" << std::endl;
-    }
+    // if (&livingRoomWrapper.livingRoom->aquaOneP == &livingRoomWrapper.livingRoom->leftCornerOfRoom.aOne)
+    // {
+        // std::cout << "they're the same object" << std::endl;
+    // }
 
     
     /*
