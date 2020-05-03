@@ -56,7 +56,7 @@ struct Water
         return clarity;
     }
 
-    // JUCE_LEAK_DETECTOR(Water)
+    JUCE_LEAK_DETECTOR(Water)
 };
 
 struct WaterWrapper
@@ -68,7 +68,7 @@ struct WaterWrapper
     {
         delete ptrToWater;
     }
-    // JUCE_LEAK_DETECTOR(Water)
+    JUCE_LEAK_DETECTOR(Water)
 };
 
 struct Aquarium
@@ -85,7 +85,7 @@ struct Aquarium
 
     Water filterWaterUntilItsClean(Water water);
 
-    // JUCE_LEAK_DETECTOR(Aquarium)
+    JUCE_LEAK_DETECTOR(Aquarium)
 };
 
 Water Aquarium::filterWaterUntilItsClean(Water water)
@@ -151,7 +151,7 @@ struct Cat
         std::cout << "Cat´s mood in memberFunc: " << this->returnMood() << std::endl;
 	}
 
-    // JUCE_LEAK_DETECTOR(Cat)
+    JUCE_LEAK_DETECTOR(Cat)
 };
 
 void Cat::jump() 
@@ -188,7 +188,7 @@ struct Cup
     void breakCup();
     void fallFromTable();
 
-    // JUCE_LEAK_DETECTOR(Cup)
+    JUCE_LEAK_DETECTOR(Cup)
 };
 
 void Cup::stand() 
@@ -207,16 +207,16 @@ void Cup::fallFromTable()
 /*
 struct MyUDT_1 //My class def from the 'this' video that depends on some other UDTs
 {
+    MyUDT_1(A& _a_, C* _c_) : a(_a_), c(_c_) { }
+    A& a; //MyUDT_1 depends on an instance of A
+    C* c = nullptr;
+       
     struct Nested
     {
         B& b1, &b2;  //Nested depends on two B instances
         Nested(B& _1, B& _2) : b1(_1), b2(_2) { }
     };
-    
-    MyUDT_1(A& _a_, C* _c_) : a(_a_), c(_c_) { }
-    A& a; //MyUDT_1 depends on an instance of A
-    C* c = nullptr;
-    
+
     B b1, b2;
     Nested nested{ b1, b2 }; //'nested' depends on b1 and b2
     
@@ -237,26 +237,31 @@ struct UDTWrapper
  */
 struct LivingRoom
 {
-    struct LeftCornerOfRoom
-    {
-        Aquarium* a1, *a2;  //Nested depends on two B instances
-        LeftCornerOfRoom(Aquarium* aOne_, Aquarium* aTwo_) : a1(aOne_), a2(aTwo_) { }
-    };
+    /*
+    MyUDT_1(A& _a_, C* _c_) : a(_a_), c(_c_) { }
+    A& a; //MyUDT_1 depends on an instance of A
+    C* c = nullptr;
+    */
     
-    // i put those vars here because I init them in the ctor
-    Aquarium* aquarium = nullptr;
     Cat& cat;
-
-    LivingRoom(Cat& cat_, Aquarium* aquarium_) : cat(cat_), aquarium(aquarium_) { }
+    
+    LivingRoom(Cat& cat_) : cat(cat_) { }
     ~LivingRoom() { }
 
 
-    // i cant refer to a practical situation thats why I dont no if dereferencing makes sense then but practically I need an object in this ctor, not a ptr
-    LeftCornerOfRoom leftCornerOfRoom { aquarium, aquarium };
+    struct LeftCornerOfRoom
+    {
+        Aquarium& aOne, &aTwo;  //Nested depends on two B instances
+        LeftCornerOfRoom(Aquarium& aOne_, Aquarium& aTwo_) : aOne(aOne_), aTwo(aTwo_) { }
+    };
+
+    Aquarium aquaOneP, aquaTwoP;
+    LeftCornerOfRoom leftCornerOfRoom { aquaOneP, aquaTwoP };
+
 
     void tryToCatchAFish();
 
-    // JUCE_LEAK_DETECTOR(LivingRoom)
+    JUCE_LEAK_DETECTOR(LivingRoom)
 };
 
 struct LivingRoomWrapper
@@ -297,9 +302,8 @@ struct LivingRoomWrapper
     }
 
     Cat cat;
-    Cup cup;
 
-    // JUCE_LEAK_DETECTOR(Fun)
+    JUCE_LEAK_DETECTOR(Fun)
  };
 
  struct FunWrapper
@@ -317,16 +321,8 @@ struct LivingRoomWrapper
 
 int main()
 {
-    Aquarium aquarium;
+    Aquarium aPlants, aSharks;
     Cat cat;
-    Cup cup;
-    
-    cat.jump();
-    cup.fallFromTable();
-    
-    LivingRoom livingRoom(cat, &aquarium);
-    
-    Fun fun;
 
     // Project 5 Part 2
     /*
@@ -355,10 +351,14 @@ int main()
     /*
      here's the wrapper class usage, from the 'new' video
      */
-    LivingRoomWrapper livingRoomWrapper( new LivingRoom(cat, &aquarium) );
+    LivingRoomWrapper livingRoomWrapper( new LivingRoom(cat) );
     
-    if( &livingRoomWrapper.livingRoom->aquarium == &livingRoomWrapper.livingRoom->leftCornerOfRoom.a1 )
+    livingRoomWrapper.livingRoom->cat.purrrr();
+
+    if (&livingRoomWrapper.livingRoom->aquaOneP == &livingRoomWrapper.livingRoom->leftCornerOfRoom.aOne)
+    {
         std::cout << "they're the same object" << std::endl;
+    }
 
     
     /*
