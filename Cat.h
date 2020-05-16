@@ -22,5 +22,5 @@ struct Cat
     float returnMood();
     void printMemberWithFunc();
 
-    JUCE_LEAK_DETECTOR(Cat)
+    //JUCE_LEAK_DETECTOR(Cat)
 };

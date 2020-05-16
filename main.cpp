@@ -33,9 +33,6 @@
 #include "LeakedObjectDetector.h"
 #include <iostream>
 
-
-
-
 #include "Water.h"
 #include "Aquarium.h"
 
@@ -57,14 +54,16 @@ int main()
     FunWrapper fW (new Fun());
     fW.ptrToFun->printFun();
 
-    LivingRoomWrapper livingRoomWrapper( new LivingRoom(cat) );
+    //LivingRoomWrapper livingRoomWrapper( new LivingRoom(cat) );
     
-    livingRoomWrapper.livingRoom->cat.purrrr();
+    //livingRoomWrapper.livingRoom->cat.purrrr();
 
+    /*
     if (&livingRoomWrapper.livingRoom->aquaOneP == &livingRoomWrapper.livingRoom->leftCornerOfRoom.aOne)
     {
         std::cout << "they're the same object" << std::endl;
     }
+    */
 
     std::cout << "good to go!\n" << std::endl;
 }

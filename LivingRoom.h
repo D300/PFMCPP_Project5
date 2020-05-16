@@ -25,5 +25,5 @@ struct LivingRoom
 
     void tryToCatchAFish();
 
-    JUCE_LEAK_DETECTOR(LivingRoom)
+    //JUCE_LEAK_DETECTOR(LivingRoom)
 };

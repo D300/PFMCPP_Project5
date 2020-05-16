@@ -12,5 +12,5 @@ struct Water
 
     float getCondition();
 
-    JUCE_LEAK_DETECTOR(Water)
+    // JUCE_LEAK_DETECTOR(Water)
 };

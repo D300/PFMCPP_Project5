@@ -13,5 +13,5 @@ struct Fun
 
     Cat cat;
 
-    JUCE_LEAK_DETECTOR(Fun)
+    //JUCE_LEAK_DETECTOR(Fun)
 };
