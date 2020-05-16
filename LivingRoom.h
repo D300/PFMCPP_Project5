@@ -2,8 +2,8 @@
 
 #include "LeakedObjectDetector.h"
 
+#include "Aquarium.h"
 
-struct Aquarium;
 struct Cat;
 struct LivingRoom
 {
@@ -15,7 +15,8 @@ struct LivingRoom
     struct LeftCornerOfRoom
     {
         Aquarium& aOne, &aTwo;
-        LeftCornerOfRoom(Aquarium& aOne_, Aquarium& aTwo_) : aOne(aOne_), aTwo(aTwo_) { }
+        LeftCornerOfRoom(Aquarium& aOne_, Aquarium& aTwo_) : 
+        aOne(aOne_), aTwo(aTwo_) { }
     };
 
     Aquarium aquaOneP, aquaTwoP;

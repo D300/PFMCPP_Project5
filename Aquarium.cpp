@@ -1,4 +1,4 @@
-#include "Aquarium.h"
+// #include "Aquarium.h"
 
 Aquarium::Aquarium() : size(39)
 {
@@ -12,12 +12,10 @@ Aquarium::~Aquarium()
 
 Water Aquarium::filterWaterUntilItsClean(Water water)
 {
-
     while (water.getCondition() < 0)
     {
         water.clarity += 5;
         std::cout << "...filters water..." << std::endl;
     }
-    
     return water;
 }

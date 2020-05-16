@@ -12,7 +12,7 @@ struct WaterWrapper
     {
         delete ptrToWater;
     }
-    // JUCE_LEAK_DETECTOR(Water)
+    JUCE_LEAK_DETECTOR(WaterWrapper)
 };
 
 struct Fun;
@@ -26,6 +26,7 @@ struct FunWrapper
     {
         delete ptrToFun;
     }
+    JUCE_LEAK_DETECTOR(FunWrapper)
 };
 
 struct LivingRoom;
@@ -38,4 +39,5 @@ struct LivingRoomWrapper
     {
         delete livingRoom;
     }
+    JUCE_LEAK_DETECTOR(LivingRoomWrapper)
 };
