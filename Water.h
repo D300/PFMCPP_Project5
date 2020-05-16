@@ -6,20 +6,11 @@ struct Water
 {
     float clarity = -50.f;
     
-    Water(float c)  : clarity(c) 
-    { 
+    Water(float c);
 
-    }
+    ~Water();
 
-    ~Water()
-    { 
-        std::cout << "water destructor" << std::endl; 
-    }  
-
-    float getCondition()
-    {
-        return clarity;
-    }
+    float getCondition();
 
     JUCE_LEAK_DETECTOR(Water)
 };

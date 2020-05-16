@@ -6,23 +6,10 @@
 
 struct Fun
 {
-    Fun() 
-    {
-        std::cout << "fun ctor" << std::endl;
-    }
+    Fun();
+    ~Fun();
 
-    ~Fun() 
-    { 
-        // std::cout << "fun destructor" << std::endl;
-
-        // cat.jump();
-        // cup.fallFromTable(); 
-    }
-
-    void printFun()
-    {
-        std::cout << "fun-fun-fun" << std::endl;
-    }
+    void printFun();
 
     Cat cat;
 
