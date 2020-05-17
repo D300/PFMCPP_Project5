@@ -34,3 +34,36 @@ struct LivingRoomWrapper
     
     JUCE_LEAK_DETECTOR(LivingRoomWrapper)
 };
+
+struct Cup;
+struct CupWrapper
+{
+    Cup* cup = nullptr;
+
+    CupWrapper(Cup* cup_);
+    ~CupWrapper();
+
+    JUCE_LEAK_DETECTOR(CupWrapper)
+};
+
+struct Aquarium;
+struct AquariumWrapper
+{
+    Aquarium* aquarium = nullptr;
+
+    AquariumWrapper(Aquarium* aquarium_);
+    ~AquariumWrapper();
+
+    JUCE_LEAK_DETECTOR(AquariumWrapper)
+};
+
+struct Cat;
+struct CatWrapper
+{
+    Cat* cat = nullptr;
+
+    CatWrapper(Cat* cat_);
+    ~CatWrapper();
+
+    JUCE_LEAK_DETECTOR(CatWrapper)
+};

@@ -32,3 +32,38 @@ LivingRoomWrapper::~LivingRoomWrapper()
 {
     delete livingRoom;
 }
+
+
+
+CupWrapper::CupWrapper(Cup* cup_) :
+cup(cup_)
+{
+
+}
+
+CupWrapper::~CupWrapper()
+{
+    delete cup;
+}
+
+AquariumWrapper::AquariumWrapper(Aquarium* aquarium_) : 
+aquarium(aquarium_)
+{
+
+}
+
+AquariumWrapper::~AquariumWrapper()
+{
+    delete aquarium;
+}
+
+CatWrapper::CatWrapper(Cat* cat_) : 
+cat(cat_)
+{
+
+}
+
+CatWrapper::~CatWrapper()
+{
+    delete cat;
+}
