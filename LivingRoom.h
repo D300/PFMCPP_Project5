@@ -1,5 +1,6 @@
 #pragma once
 
+#include <string>
 #include "LeakedObjectDetector.h"
 
 #include "Aquarium.h"
@@ -23,7 +24,7 @@ struct LivingRoom
     // where to put this guy?
     LeftCornerOfRoom leftCornerOfRoom { aquaOneP, aquaTwoP };
 
-    void tryToCatchAFish();
+    std::string tryToCatchAFish();
 
-    //JUCE_LEAK_DETECTOR(LivingRoom)
+    JUCE_LEAK_DETECTOR(LivingRoom)
 };

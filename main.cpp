@@ -35,35 +35,35 @@
 
 #include "Water.h"
 #include "Aquarium.h"
-
 #include "Cat.h"
 #include "Cup.h"
-
 #include "Fun.h"
 #include "LivingRoom.h"
+
 #include "Wrappers.h"
 
 int main()
 {
     Aquarium aPlants, aSharks;
     Cat cat;
+    Cup cup;
+
 
     WaterWrapper wW (new Water(15.f));
     std::cout << "water´s condition: " << wW.ptrToWater->getCondition() << std::endl;
-
+    
     FunWrapper fW (new Fun());
     fW.ptrToFun->printFun();
-
-    //LivingRoomWrapper livingRoomWrapper( new LivingRoom(cat) );
     
-    //livingRoomWrapper.livingRoom->cat.purrrr();
+    LivingRoomWrapper lRW ( new LivingRoom(cat) );
+    std::cout << "livingRoomWrapper: " << lRW.livingRoom->tryToCatchAFish() << "\n";
 
-    /*
-    if (&livingRoomWrapper.livingRoom->aquaOneP == &livingRoomWrapper.livingRoom->leftCornerOfRoom.aOne)
+    lRW.livingRoom->cat.purrrr();
+        
+    if (&lRW.livingRoom->aquaOneP == &lRW.livingRoom->leftCornerOfRoom.aOne)
     {
         std::cout << "they're the same object" << std::endl;
     }
-    */
-
+    
     std::cout << "good to go!\n" << std::endl;
 }

@@ -10,9 +10,9 @@ LivingRoom::~LivingRoom()
 
 }
 
-void LivingRoom::tryToCatchAFish() 
+std::string LivingRoom::tryToCatchAFish() 
 {
-
+    return "big_fish";
 }
 
 LivingRoom::LeftCornerOfRoom::LeftCornerOfRoom(Aquarium& aOne_, Aquarium& aTwo_) : 

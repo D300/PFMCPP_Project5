@@ -18,6 +18,6 @@ struct Cup
     void breakCup();
     void fallFromTable();
 
-    // JUCE_LEAK_DETECTOR(Cup)
+    JUCE_LEAK_DETECTOR(Cup)
 };
 
