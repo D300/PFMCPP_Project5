@@ -48,7 +48,6 @@ int main()
     Cat cat;
     Cup cup;
 
-
     WaterWrapper wW (new Water(15.f));
     std::cout << "water´s condition: " << wW.ptrToWater->getCondition() << std::endl;
     

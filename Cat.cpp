@@ -2,7 +2,8 @@
 
 Cat::Cat() 
 { 
-    hairLen = 0.5f; 
+    hairLen = 0.5f;
+    std::cout << "cat ctor" << std::endl; 
 }
 
 Cat::~Cat() 

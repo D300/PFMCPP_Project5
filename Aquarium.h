@@ -4,7 +4,6 @@
 
 #include "Water.h"
 
-struct Water;
 struct Aquarium
 {
     float size;

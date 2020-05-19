@@ -3,7 +3,8 @@
 
 Cup::Cup() 
 { 
-    color = 2; 
+    std::cout << "cup ctor" << std::endl;
+    color = 2;
 }
 
 Cup::~Cup() 
