@@ -8,7 +8,7 @@ struct Aquarium
 {
     float size;
 
-    Aquarium();
+    Aquarium(int size_);
 
     ~Aquarium();
 

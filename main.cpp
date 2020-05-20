@@ -44,7 +44,8 @@
 
 int main()
 {
-    Aquarium aPlants, aSharks;
+    Aquarium aPlants(20); 
+    Aquarium aSharks(40);
     Cat cat;
     Cup cup;
 
@@ -54,15 +55,23 @@ int main()
     FunWrapper fW (new Fun());
     fW.ptrToFun->printFun();
     
-    LivingRoomWrapper lRW ( new LivingRoom(cat) );
+    // edited the ctor here
+    LivingRoomWrapper lRW ( new LivingRoom(cat, &aPlants, &aSharks) );
     std::cout << "livingRoomWrapper: " << lRW.livingRoom->tryToCatchAFish() << "\n";
 
     lRW.livingRoom->cat.purrrr();
-        
-    if (&lRW.livingRoom->aquaOneP == &lRW.livingRoom->leftCornerOfRoom.aOne)
+
+    /*  
+    if (&lRW.livingRoom->aquaOne == &lRW.livingRoom->leftCornerOfRoom.aquaOne)
     {
         std::cout << "they're the same object" << std::endl;
     }
+    */
+
+    // additional challange
+
+
+
     
     std::cout << "good to go!\n" << std::endl;
 }

@@ -1,11 +1,14 @@
 #include "LivingRoom.h"
     
-LivingRoom::LivingRoom(Cat& cat_) : cat(cat_) 
+LivingRoom::LivingRoom(Cat& cat_, Aquarium* ptrAquaOne_, Aquarium* ptrAquaTwo_) : 
+cat(cat_),
+ptrAquaOne(ptrAquaOne_), 
+ptrAquaTwo(ptrAquaTwo_)
 { 
     std::cout << "living room ctor\n" << std::endl;
 
-    aquaOneP.size = 40;
-    aquaTwoP.size = 60;
+    ptrAquaOne->size = 40;
+    ptrAquaTwo->size = 60;
 }
 
 LivingRoom::~LivingRoom() 
@@ -18,12 +21,13 @@ std::string LivingRoom::tryToCatchAFish()
     return "big_fish";
 }
 
-LivingRoom::LeftCornerOfRoom::LeftCornerOfRoom(Aquarium& aOne_, Aquarium& aTwo_) : 
-aOne(aOne_), aTwo(aTwo_) 
+LivingRoom::LeftCornerOfRoom::LeftCornerOfRoom(Aquarium* aquaOne_, Aquarium* aquaTwo_) : 
+ptrAquaOneChild(aquaOne_), 
+ptrAquaTwoChild(aquaTwo_) 
 { 
     std::cout << "left corner of the room ctor\n" << std::endl;
 
-    std::cout << "aOne size: " << aOne.size << "\n" << std::endl;
-    std::cout << "aTwo size: " << aTwo.size << std::endl;
+    std::cout << "aquaOne size: " << ptrAquaOneChild->size << "\n" << std::endl;
+    std::cout << "aquaTwo size: " << ptrAquaTwoChild->size << std::endl;
 }
 

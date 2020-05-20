@@ -10,19 +10,20 @@ struct LivingRoom
 {
     Cat& cat;
     
-    LivingRoom(Cat& cat_);
+    // is line 14 and 16 the correct approach?
+    Aquarium* ptrAquaOne, *ptrAquaTwo;
+    
+    LivingRoom(Cat& cat_, Aquarium* ptrAquaOne_, Aquarium* ptrAquaTwo_);
     ~LivingRoom();
 
     struct LeftCornerOfRoom
     {
-        Aquarium& aOne, &aTwo;
-        LeftCornerOfRoom(Aquarium& aOne_, Aquarium& aTwo_);
+        Aquarium* ptrAquaOneChild, *ptrAquaTwoChild;
+        LeftCornerOfRoom(Aquarium* aquaOne_, Aquarium* aquaTwo_);
     };
 
-    Aquarium aquaOneP, aquaTwoP;
-    
     // where to put this guy?
-    LeftCornerOfRoom leftCornerOfRoom { aquaOneP, aquaTwoP };
+    LeftCornerOfRoom leftCornerOfRoom { ptrAquaOne, ptrAquaTwo };
 
     std::string tryToCatchAFish();
 

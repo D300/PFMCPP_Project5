@@ -1,6 +1,6 @@
 #include "Aquarium.h"
 
-Aquarium::Aquarium() : size(39)
+Aquarium::Aquarium(int size_) : size(size_)
 {
     std::cout << "aquarium ctor\n" << std::endl;
 }
