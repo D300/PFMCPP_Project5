@@ -27,7 +27,7 @@ struct FunWrapper
 struct LivingRoom;
 struct LivingRoomWrapper
 {
-    LivingRoom* livingRoom = nullptr;
+    LivingRoom* ptrToLivingRoom = nullptr;
     
     LivingRoomWrapper(LivingRoom* livingRoom_);
     ~LivingRoomWrapper();
@@ -38,7 +38,7 @@ struct LivingRoomWrapper
 struct Cup;
 struct CupWrapper
 {
-    Cup* cup = nullptr;
+    Cup* ptrToCup = nullptr;
 
     CupWrapper(Cup* cup_);
     ~CupWrapper();
@@ -49,7 +49,7 @@ struct CupWrapper
 struct Aquarium;
 struct AquariumWrapper
 {
-    Aquarium* aquarium = nullptr;
+    Aquarium* ptrToAquarium = nullptr;
 
     AquariumWrapper(Aquarium* aquarium_);
     ~AquariumWrapper();
@@ -60,7 +60,7 @@ struct AquariumWrapper
 struct Cat;
 struct CatWrapper
 {
-    Cat* cat = nullptr;
+    Cat* ptrToCat = nullptr;
 
     CatWrapper(Cat* cat_);
     ~CatWrapper();

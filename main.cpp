@@ -42,10 +42,18 @@
 
 #include "Wrappers.h"
 
+/*
+ These instances need to be Wrapped instances.
+ Make your LivingRoom::leftCornerOfRoom use these Aquarium instances that are wrapped instead of the ones that are LivingRoom class members.
+ you'll need to modify your LivingRoom constructor in order to initialize the leftCornerOfRoom member variable
+*/
+
+
 int main()
 {
-    Aquarium aPlants(20); 
-    Aquarium aSharks(40);
+    AquariumWrapper aWPlants ( new Aquarium(20) ); 
+    AquariumWrapper aWSharks ( new Aquarium (40) );
+    
     Cat cat;
     Cup cup;
 
@@ -55,23 +63,29 @@ int main()
     FunWrapper fW (new Fun());
     fW.ptrToFun->printFun();
     
-    // edited the ctor here
-    LivingRoomWrapper lRW ( new LivingRoom(cat, &aPlants, &aSharks) );
-    std::cout << "livingRoomWrapper: " << lRW.livingRoom->tryToCatchAFish() << "\n";
+    auto* aWPlantPtr = aWPlants.ptrToAquarium;
+    auto* aWSharksPtr = aWSharks.ptrToAquarium;
 
-    lRW.livingRoom->cat.purrrr();
+    LivingRoomWrapper lRW ( new LivingRoom(cat, *aWPlantPtr, *aWSharksPtr));
+    
+    std::cout << "livingRoomWrapper: " << lRW.ptrToLivingRoom->tryToCatchAFish() << "\n";
+    lRW.ptrToLivingRoom->cat.purrrr();
+    
 
-    /*  
-    if (&lRW.livingRoom->aquaOne == &lRW.livingRoom->leftCornerOfRoom.aquaOne)
+    // after challenge:
+    std::cout << "aquarium size: " << lRW.ptrToLivingRoom->leftCornerOfRoom.aquaPlants.getSize() << "  " << std::endl;
+
+    if (&lRW.ptrToLivingRoom->aquaPlants == &lRW.ptrToLivingRoom->leftCornerOfRoom.aquaPlants)
     {
         std::cout << "they're the same object" << std::endl;
     }
-    */
-
-    // additional challange
-
-
-
     
+    LivingRoom livingRoom (cat, *aWPlantPtr, *aWSharksPtr);
+
+    if (&livingRoom.aquaPlants == &lRW.ptrToLivingRoom->leftCornerOfRoom.aquaPlants)
+    {
+        std::cout << "they're the same object tooo" << std::endl;
+    }
+
     std::cout << "good to go!\n" << std::endl;
 }

@@ -32,52 +32,51 @@ FunWrapper::~FunWrapper()
 
 
 LivingRoomWrapper::LivingRoomWrapper(LivingRoom* livingRoom_) : 
-livingRoom(livingRoom_) 
+ptrToLivingRoom(livingRoom_) 
 {
 
 }
    
 LivingRoomWrapper::~LivingRoomWrapper() 
 {
-    delete livingRoom;
-    livingRoom = nullptr;
+    delete ptrToLivingRoom;
+    ptrToLivingRoom = nullptr;
 }
 
 
 
 CupWrapper::CupWrapper(Cup* cup_) :
-cup(cup_)
+ptrToCup(cup_)
 {
 
 }
 
 CupWrapper::~CupWrapper()
 {
-    delete cup;
-    cup = nullptr;
+    delete ptrToCup;
+    ptrToCup = nullptr;
 }
 
 AquariumWrapper::AquariumWrapper(Aquarium* aquarium_) : 
-aquarium(aquarium_)
+ptrToAquarium(aquarium_)
 {
 
 }
 
 AquariumWrapper::~AquariumWrapper()
 {
-    delete aquarium;
-    aquarium = nullptr;
-
+    delete ptrToAquarium;
+    ptrToAquarium = nullptr;
 }
 
 CatWrapper::CatWrapper(Cat* cat_) : 
-cat(cat_)
+ptrToCat(cat_)
 {
 
 }
 
 CatWrapper::~CatWrapper()
 {
-    delete cat;
-    cat = nullptr;
+    delete ptrToCat;
+    ptrToCat = nullptr;
 }
