@@ -2,7 +2,7 @@
 
 #include <string>
 #include "LeakedObjectDetector.h"
-#include "Wrappers.h"
+
 #include "Aquarium.h"
 
 struct Cat;

@@ -14,7 +14,7 @@ struct Aquarium
 
     Water filterWaterUntilItsClean(Water water);
 
-    int getSize() { return size; }
+    float getSize() { return size; }
 
     JUCE_LEAK_DETECTOR(Aquarium)
 };
