@@ -30,347 +30,61 @@
          just split it up into source files and provide the appropriate #include directives.
  */
 
-
-
-
-
-
 #include "LeakedObjectDetector.h"
 #include <iostream>
 
-/*
- copied UDT 1:
- */
+#include "Water.h"
+#include "Aquarium.h"
+#include "Cat.h"
+#include "Cup.h"
+#include "Fun.h"
+#include "LivingRoom.h"
 
-// namespace Part5 {
-
-
-struct Water
-{
-    float clarity = -50.f;
-    Water(float c) : clarity(c) { }
-
-    ~Water() 
-    { 
-        std::cout << "water destructor" << std::endl; 
-    }
-
-    float getCondition()
-    {
-        return clarity;
-    }
-
-    JUCE_LEAK_DETECTOR(Water)
-};
-
-struct WaterWrapper
-{
-    Water* ptrToWater = nullptr;
-    
-    WaterWrapper(Water* ptr) : ptrToWater( ptr ) { }
-    ~WaterWrapper()
-    {
-        delete ptrToWater;
-    }
-    JUCE_LEAK_DETECTOR(Water)
-};
-
-struct Aquarium
-{
-    float size;
-
-    Aquarium() :
-    size(39)
-    {
-        std::cout << "aquarium ctor\n" << std::endl;
-    }
-
-    ~Aquarium() { std::cout << "aquarium destructor" << std::endl; }
-
-    Water filterWaterUntilItsClean(Water water);
-
-    JUCE_LEAK_DETECTOR(Aquarium)
-};
-
-Water Aquarium::filterWaterUntilItsClean(Water water)
-{
-
-    while (water.getCondition() < 0)
-    {
-        water.clarity += 5;
-        std::cout << "...filters water..." << std::endl;
-    }
-    
-    return water;
-}
+#include "Wrappers.h"
 
 /*
-int main()
-{
-    Aquarium aquarium;
-    Water water(-50);
-    
-    auto filteredWater = aquarium.filterWaterUntilItsClean(water);
-
-    std::cout << "\nwater is clean with a clarity of " << filteredWater.clarity << "\n" << std::endl;
-
-    // WaterWrapper ww(water);
-
-    return 0;
-}
-*/
-
-// } // end namespace Part5
-
-
-/*
- copied UDT 2:
- */
-
-struct Cat
-{    
-    float hairLen = 0.3f;
-
-    Cat() { hairLen = 0.5f; }
-
-    ~Cat() { std::cout << "cat destructor" << std::endl; }
-
-    int teethStyle;
-    bool healthy = true;
-    int age = 4;
-    float mood = 0.5f;
-    
-    void jump();
-    void chill();
-    void purrrr();
-
-    float returnMood()
-    {
-        return mood;
-    }
-
-    void printMemberWithFunc() 
-	{ 
-        std::cout << "\nCat´s age in memberFunc: " << this->age << std::endl;
-        std::cout << "Cat´s mood in memberFunc: " << this->returnMood() << std::endl;
-	}
-
-    JUCE_LEAK_DETECTOR(Cat)
-};
-
-void Cat::jump() 
-{
-    std::cout << "jump - Art washes away from the soul the dust of everyday life.\n" << std::endl;
-}
-void Cat::chill() 
-{
-    std::cout << "chill" << std::endl;
-}
-void Cat::purrrr() 
-{
-    std::cout << "purrrr" << std::endl;
-}
-
-/*
- copied UDT 3:
- */
-
-struct Cup 
-{
-    int color = 1;
-
-    Cup() { color = 2; }
-
-    ~Cup() { std::cout << "cup destructor" << std::endl; }
-
-    int material = 0;
-    float size = 1.5f;
-    bool dirty = false;
-    float weigth = 5.0f;
-    
-    void stand();
-    void breakCup();
-    void fallFromTable();
-
-    JUCE_LEAK_DETECTOR(Cup)
-};
-
-void Cup::stand() 
-{
-    std::cout << "cup stands" << std::endl;
-}
-void Cup::breakCup() 
-{
-    std::cout << "breakCup" << std::endl;
-}
-void Cup::fallFromTable() 
-{
-    std::cout << "fallFromTable - Art is a lie that makes us realize truth.\n" << std::endl;
-}
-
-/*
-struct MyUDT_1 //My class def from the 'this' video that depends on some other UDTs
-{
-    MyUDT_1(A& _a_, C* _c_) : a(_a_), c(_c_) { }
-    A& a; //MyUDT_1 depends on an instance of A
-    C* c = nullptr;
-       
-    struct Nested
-    {
-        B& b1, &b2;  //Nested depends on two B instances
-        Nested(B& _1, B& _2) : b1(_1), b2(_2) { }
-    };
-
-    B b1, b2;
-    Nested nested{ b1, b2 }; //'nested' depends on b1 and b2
-    
-    JUCE_LEAK_DETECTOR(MyUDT_1) // <-- added the leak detector
-};
-
-struct UDTWrapper
-{
-    UDTWrapper(MyUDT_1* _udt) : udt1(_udt) { }
-    ~UDTWrapper() { delete udt1; }
-    MyUDT_1* udt1 = nullptr;
-};
+ These instances need to be Wrapped instances.
+ Make your LivingRoom::leftCornerOfRoom use these Aquarium instances that are wrapped instead of the ones that are LivingRoom class members.
+ you'll need to modify your LivingRoom constructor in order to initialize the leftCornerOfRoom member variable
 */
 
 
-/*
- new UDT 4:
- */
-struct LivingRoom
-{
-    /*
-    MyUDT_1(A& _a_, C* _c_) : a(_a_), c(_c_) { }
-    A& a; //MyUDT_1 depends on an instance of A
-    C* c = nullptr;
-    */
-    
-    Cat& cat;
-    
-    LivingRoom(Cat& cat_) : cat(cat_) { }
-    ~LivingRoom() { }
-
-
-    struct LeftCornerOfRoom
-    {
-        Aquarium& aOne, &aTwo;  //Nested depends on two B instances
-        LeftCornerOfRoom(Aquarium& aOne_, Aquarium& aTwo_) : aOne(aOne_), aTwo(aTwo_) { }
-    };
-
-    Aquarium aquaOneP, aquaTwoP;
-    LeftCornerOfRoom leftCornerOfRoom { aquaOneP, aquaTwoP };
-
-
-    void tryToCatchAFish();
-
-    JUCE_LEAK_DETECTOR(LivingRoom)
-};
-
-struct LivingRoomWrapper
-{
-    LivingRoom* livingRoom = nullptr;
-    
-    LivingRoomWrapper(LivingRoom* livingRoom_) : livingRoom(livingRoom_) {}
-    ~LivingRoomWrapper() 
-    {
-        delete livingRoom;
-    }
-
-};
-
-
-/*
- new UDT 5:
- */
- 
-struct Fun
-{
-    Fun() 
-    {
-        std::cout << "fun ctor" << std::endl;
-    }
-
-    ~Fun() 
-    { 
-        // std::cout << "fun destructor" << std::endl;
-
-        // cat.jump();
-        // cup.fallFromTable(); 
-    }
-
-    void printFun()
-    {
-        std::cout << "fun-fun-fun" << std::endl;
-    }
-
-    Cat cat;
-
-    JUCE_LEAK_DETECTOR(Fun)
-};
-
-struct FunWrapper
-{
-    Fun* ptrToFun = nullptr; 
-
-    FunWrapper(Fun* ptr) : ptrToFun(ptr) { }
-
-    ~FunWrapper()
-    {
-        delete ptrToFun;
-    }
-};
-
-/*
- MAKE SURE YOU ARE NOT ON THE MASTER BRANCH
-
- Commit your changes by clicking on the Source Control panel on the left, entering a message, and click [Commit and push].
- 
- If you didn't already: 
-    Make a pull request after you make your first commit
-    pin the pull request link and this repl.it link to our DM thread in a single message.
-
- send me a DM to review your pull request when the project is ready for review.
-
- Wait for my code review.
- */
-
 int main()
 {
-    Aquarium aPlants, aSharks;
+    AquariumWrapper aWPlants ( new Aquarium(20) ); 
+    AquariumWrapper aWSharks ( new Aquarium (40) );
+    
     Cat cat;
+    Cup cup;
 
-    /*
-    std::cout << "\n====PROJECT 5 PART 2 START====" << std::endl;
-
-    // 1
-    std::cout << "cat´s age: " << cat.age << std::endl;
-    std::cout << "cup´s weigth: " << cup.weigth << std::endl;
-
-    // printing via this->
-    cat.printMemberWithFunc(); 
-
-    std::cout << "====PROJECT 5 PART 2 END====\n" << std::endl;
-    */
-
-    std::cout << "====PROJECT 5 PART 3 START====\n" << std::endl;
-
-
-    // Part 3
     WaterWrapper wW (new Water(15.f));
     std::cout << "water´s condition: " << wW.ptrToWater->getCondition() << std::endl;
-
-    FunWrapper fW ( new Fun());
-    fW.ptrToFun->printFun();
-
-    LivingRoomWrapper livingRoomWrapper( new LivingRoom(cat) );
     
-    livingRoomWrapper.livingRoom->cat.purrrr();
+    FunWrapper fW (new Fun());
+    fW.ptrToFun->printFun();
+    
+    auto* aWPlantPtr = aWPlants.ptrToAquarium;
+    auto* aWSharksPtr = aWSharks.ptrToAquarium;
 
-    if (&livingRoomWrapper.livingRoom->aquaOneP == &livingRoomWrapper.livingRoom->leftCornerOfRoom.aOne)
+    LivingRoomWrapper lRW ( new LivingRoom(cat, *aWPlantPtr, *aWSharksPtr));
+    
+    std::cout << "livingRoomWrapper: " << lRW.ptrToLivingRoom->tryToCatchAFish() << "\n";
+    lRW.ptrToLivingRoom->cat.purrrr();
+    
+
+    // after challenge:
+    std::cout << "aquarium size: " << lRW.ptrToLivingRoom->leftCornerOfRoom.aquaPlants.getSize() << "  " << std::endl;
+
+    if (&lRW.ptrToLivingRoom->aquaPlants == &lRW.ptrToLivingRoom->leftCornerOfRoom.aquaPlants)
     {
         std::cout << "they're the same object" << std::endl;
+    }
+    
+    LivingRoom livingRoom (cat, *aWPlantPtr, *aWSharksPtr);
+
+    if (&livingRoom.aquaPlants == &lRW.ptrToLivingRoom->leftCornerOfRoom.aquaPlants)
+    {
+        std::cout << "they're the same object tooo" << std::endl;
     }
 
     std::cout << "good to go!\n" << std::endl;
